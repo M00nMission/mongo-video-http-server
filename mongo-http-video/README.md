@@ -15,6 +15,10 @@ curl  localhost:8000/init-video
 ## Start the server
 
 ```
+source .env
+```
+
+```
 # how to start
 docker-compose up -d
 
