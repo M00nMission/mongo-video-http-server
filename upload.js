@@ -3,6 +3,9 @@ const app = express();
 const fs = require("fs");
 const mongodb = require('mongodb');
 const { MongoClient, ClientSession } = require('mongodb')
+const cors = require('cors');
+
+
 
 const dotenv = require('dotenv')
 
@@ -36,6 +39,11 @@ async function listDatabases(client) {
       console.log(`-- ${db.name}`)
   })
 }
+
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 206
+}));
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
@@ -83,7 +91,7 @@ app.get("/mongo-video", function (req, res) {
       res.status(400).send("Requires Range header");
     }
 
-    const db = client.db('videos');
+    const db = client.db('myFirstDatabase');
     // GridFS Collection
     db.collection('fs.files').findOne({}, (err, video) => {
       if (!video) {
@@ -92,13 +100,13 @@ app.get("/mongo-video", function (req, res) {
       }
 
       // Create response headers
-      const videoSize = video.length;
+      const myFirstDatabaseize = video.length;
       const start = Number(range.replace(/\D/g, ""));
-      const end = videoSize - 1;
+      const end = myFirstDatabaseize - 1;
 
       const contentLength = end - start + 1;
       const headers = {
-        "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+        "Content-Range": `bytes ${start}-${end}/${myFirstDatabaseize}`,
         "Accept-Ranges": "bytes",
         "Content-Length": contentLength,
         "Content-Type": "video/mp4",
