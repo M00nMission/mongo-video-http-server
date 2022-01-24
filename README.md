@@ -1,11 +1,33 @@
-# Code Examples For YouTube and abdisalan.com
+## Requirements
 
----
+My instructions use docker but you can run mongodb yourself locally as well.
 
-- [ReasonML Form Events](/form-events)
-- [Why I dont't Use OFFSET](/sql-offset)
-- [Simple HTTP Video Streaming](/http-video-stream)
-- [MongoDB HTTP Video Streaming](/mongo-http-video)
-- [LIVE Video Streaming Part 1](/live-stream-part-1)
-- [LIVE Video Streaming Part 2](/live-stream-part-2)
-- [LIVE Video Streaming Part 3](/live-stream-part-3)
+## How to initialize the db with a video
+
+```
+# copy the bigbuck video from our last demo
+cp ../http-video-stream/bigbuck.mp4 .
+
+# After starting the server
+curl  localhost:8000/init-video
+```
+
+## Start the server
+
+```
+source .env
+```
+
+```
+# how to start
+docker-compose up -d
+
+# how to turn off
+docker-compose down -v
+```
+
+## Bonus Challenge
+
+This way of initializing the database is pretty bad.
+Could you make an upload page?
+What about a page that lists all the videos in the db that lets you pick which one to play?
